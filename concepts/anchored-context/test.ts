@@ -1,3 +1,4 @@
+// @ts-nocheck
 /// <reference lib="dom" />
 declare const Deno: any;
 import { assertEquals, assertRejects } from "https://deno.land/std@0.224.0/assert/mod.ts";
@@ -60,6 +61,32 @@ Deno.test("AnchoredContext variant: delete twice -> second delete errors (strict
     const after = await db.collection("anchors").findOne({ paperId: "paper-2", ref: "2.1" });
     console.log("Variant3 after first delete:", after);
     await assertRejects(() => svc.delete(id));
+  } finally {
+    await cleanupTestDb(db, client);
+  }
+});
+
+
+Deno.test("AnchoredContext timestamps: createdAt and editedAt semantics", async () => {
+  const [db, client] = await newTestDb("anchored-ts");
+  try {
+    const svc = new AnchoredContextService(db);
+    const id = await svc.create("p-ts", "Section", "R", "S");
+
+    const before = await db.collection("anchors").findOne({ paperId: "p-ts", ref: "R" });
+    console.log("Timestamp before:", before);
+    assertEquals(typeof before?.createdAt, "number");
+    assertEquals("editedAt" in (before ?? {}), false);
+
+    await new Promise((r) => setTimeout(r, 2));
+    await svc.edit(id); // no-field edit should only set editedAt
+
+    const after = await db.collection("anchors").findOne({ paperId: "p-ts", ref: "R" });
+    console.log("Timestamp after:", after);
+    assertEquals(typeof after?.editedAt, "number");
+    assertEquals((after?.editedAt ?? 0) >= (before?.createdAt ?? 0), true);
+    assertEquals(after?.ref, "R");
+    assertEquals(after?.snippet, "S");
   } finally {
     await cleanupTestDb(db, client);
   }

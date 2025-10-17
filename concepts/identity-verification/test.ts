@@ -1,3 +1,4 @@
+// @ts-nocheck
 /// <reference lib="dom" />
 declare const Deno: any;
 import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
@@ -73,6 +74,26 @@ Deno.test("IdentityVerification variant: clear affiliation unsets field", async 
     const doc = await verifs.findOne({ _id: "u3" });
     console.log("Variant2 verification:", doc);
     assertEquals("affiliation" in (doc ?? {}), false);
+  } finally {
+    await cleanupTestDb(db, client);
+  }
+});
+
+
+Deno.test("IdentityVerification variants: ORCID replacement and revoke non-existent badge no-op", async () => {
+  const [db, client] = await newTestDb("identity-v3");
+  try {
+    const svc = new IdentityVerificationService(db);
+    await svc.addORCID("u4", "0000-0001-1111-1111");
+    await svc.addORCID("u4", "0000-0002-2222-2222");
+    await svc.addBadge("u4", "Author");
+    await svc.revokeBadge("u4", "NonExistent");
+
+    const verifs = db.collection<VerificationDoc>("verifications");
+    const doc = await verifs.findOne({ _id: "u4" });
+    console.log("Variant3 verification:", doc);
+    assertEquals(doc?.orcid, "0000-0002-2222-2222");
+    assertEquals(doc?.badges, ["Author"]);
   } finally {
     await cleanupTestDb(db, client);
   }

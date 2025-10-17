@@ -1,51 +1,51 @@
-[0m[38;5;245mrunning 4 tests from ./concepts/anchored-context/test.ts[0m
+running 4 tests from ./concepts/anchored-context/test.ts
 AnchoredContext OP: create -> edit -> delete ...
-[0m[38;5;245m------- output -------[0m
+------- output -------
 OP anchor: {
-  _id: new ObjectId("68f183775d0d32420f790244"),
+  _id: new ObjectId("68f18dd8d671cff31f1fd6fa"),
   paperId: "paper-1",
   kind: "Section",
   ref: "3.2",
   snippet: "Assumption text updated",
-  createdAt: 1760658295035,
-  editedAt: 1760658295080
+  createdAt: 1760660952545,
+  editedAt: 1760660952591
 }
-[0m[38;5;245m----- output end -----[0m
-AnchoredContext OP: create -> edit -> delete ... [0m[32mok[0m [0m[38;5;245m(686ms)[0m
+----- output end -----
+AnchoredContext OP: create -> edit -> delete ... ok (769ms)
 AnchoredContext variants: create multiple kinds; partial edits ...
-[0m[38;5;245m------- output -------[0m
+------- output -------
 Variants anchors: {
-  _id: new ObjectId("68f183775d0d32420f790245"),
+  _id: new ObjectId("68f18dd9d671cff31f1fd6fb"),
   paperId: "p",
   kind: "Figure",
   ref: "Fig3",
   snippet: "caption",
-  createdAt: 1760658295765,
-  editedAt: 1760658295828
+  createdAt: 1760660953158,
+  editedAt: 1760660953222
 } {
-  _id: new ObjectId("68f183775d0d32420f790246"),
+  _id: new ObjectId("68f18dd9d671cff31f1fd6fc"),
   paperId: "p",
   kind: "Lines",
   ref: "12-20",
   snippet: "snippet",
-  createdAt: 1760658295810
+  createdAt: 1760660953202
 }
-[0m[38;5;245m----- output end -----[0m
-AnchoredContext variants: create multiple kinds; partial edits ... [0m[32mok[0m [0m[38;5;245m(700ms)[0m
-AnchoredContext errors: edit/delete unknown id ... [0m[32mok[0m [0m[38;5;245m(571ms)[0m
+----- output end -----
+AnchoredContext variants: create multiple kinds; partial edits ... ok (610ms)
+AnchoredContext errors: edit/delete unknown id ... ok (530ms)
 AnchoredContext variant: delete twice -> second delete errors (strict) ...
-[0m[38;5;245m------- output -------[0m
+------- output -------
 Variant3 before delete: {
-  _id: new ObjectId("68f183795d0d32420f790247"),
+  _id: new ObjectId("68f18ddad671cff31f1fd6fd"),
   paperId: "paper-2",
   kind: "Section",
   ref: "2.1",
   snippet: "Init",
-  createdAt: 1760658297021
+  createdAt: 1760660954298
 }
 Variant3 after first delete: null
-[0m[38;5;245m----- output end -----[0m
-AnchoredContext variant: delete twice -> second delete errors (strict) ... [0m[32mok[0m [0m[38;5;245m(717ms)[0m
+----- output end -----
+AnchoredContext variant: delete twice -> second delete errors (strict) ... ok (603ms)
 
-[0m[32mok[0m | 4 passed | 0 failed [0m[38;5;245m(2s)[0m
+ok | 4 passed | 0 failed (2s)
 

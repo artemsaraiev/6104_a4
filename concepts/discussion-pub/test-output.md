@@ -1,36 +1,36 @@
-[0m[38;5;245mrunning 4 tests from ./concepts/discussion-pub/test.ts[0m
+running 4 tests from ./concepts/discussion-pub/test.ts
 DiscussionPub OP: open -> startThread -> reply -> editThread -> editReply ...
-[0m[38;5;245m------- output -------[0m
+------- output -------
 OP thread: {
-  _id: new ObjectId("68f183874d2c30f1dd1c5136"),
-  pubId: "68f183874d2c30f1dd1c5135",
+  _id: new ObjectId("68f18dd45697aecf90d11c4b"),
+  pubId: "68f18dd45697aecf90d11c4a",
   author: "u1",
   anchorId: "anchor-123",
   body: "Hello edited",
-  createdAt: 1760658311500,
-  editedAt: 1760658311557
+  createdAt: 1760660948649,
+  editedAt: 1760660948702
 }
 OP reply: {
-  _id: new ObjectId("68f183874d2c30f1dd1c5137"),
-  threadId: "68f183874d2c30f1dd1c5136",
+  _id: new ObjectId("68f18dd45697aecf90d11c4c"),
+  threadId: "68f18dd45697aecf90d11c4b",
   author: "u2",
   body: "Hi edited",
-  createdAt: 1760658311538,
-  editedAt: 1760658311575
+  createdAt: 1760660948683,
+  editedAt: 1760660948720
 }
-[0m[38;5;245m----- output end -----[0m
-DiscussionPub OP: open -> startThread -> reply -> editThread -> editReply ... [0m[32mok[0m [0m[38;5;245m(1s)[0m
+----- output end -----
+DiscussionPub OP: open -> startThread -> reply -> editThread -> editReply ... ok (999ms)
 DiscussionPub variants: deleteReply then reply again; deleteThread cascades ...
-[0m[38;5;245m------- output -------[0m
+------- output -------
 Variants1 replies after cascade: []
-[0m[38;5;245m----- output end -----[0m
-DiscussionPub variants: deleteReply then reply again; deleteThread cascades ... [0m[32mok[0m [0m[38;5;245m(1s)[0m
+----- output end -----
+DiscussionPub variants: deleteReply then reply again; deleteThread cascades ... ok (1s)
 DiscussionPub variants: startThread without anchor; multiple threads ...
-[0m[38;5;245m------- output -------[0m
-Variants2 threads: 68f183894d2c30f1dd1c513d 68f183894d2c30f1dd1c513e
-[0m[38;5;245m----- output end -----[0m
-DiscussionPub variants: startThread without anchor; multiple threads ... [0m[32mok[0m [0m[38;5;245m(854ms)[0m
-DiscussionPub errors: duplicate pub; reply missing thread; edit/delete missing ids ... [0m[32mok[0m [0m[38;5;245m(747ms)[0m
+------- output -------
+Variants2 threads: 68f18dd65697aecf90d11c52 68f18dd65697aecf90d11c53
+----- output end -----
+DiscussionPub variants: startThread without anchor; multiple threads ... ok (898ms)
+DiscussionPub errors: duplicate pub; reply missing thread; edit/delete missing ids ... ok (959ms)
 
-[0m[32mok[0m | 4 passed | 0 failed [0m[38;5;245m(3s)[0m
+ok | 4 passed | 0 failed (3s)
 
